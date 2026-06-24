@@ -1,0 +1,489 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: min(100vw, 640px);
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 2.5rem;
+  /* keep effects that spill past their box (hologram particles) from ever
+     adding a horizontal scrollbar; vertical spill still shows */
+  overflow-x: clip;
+}
+
+.page.page-bleed {
+  overflow-x: visible;
+}
+
+.page.page-deskfolio {
+  max-width: none;
+  /* 100% of the content box, NOT 100vw — 100vw includes the vertical scrollbar's width, which made the
+     full-bleed page ~10px wider than the visible area and forced a horizontal scrollbar */
+  width: 100%;
+  padding: 0 0 2.5rem;
+}
+
+.page-deskfolio > .tagline {
+  width: min(640px, calc(100vw - 3rem));
+  margin: 0 auto 1rem;
+}
+
+/* "how to use" demo — a self-contained LIGHT card sitting on the dark write-up. The premium-iOS feel
+   in the reference lives on a light surface with soft, diffuse shadows, so this whole block becomes
+   that surface (like the component's own pickers). The screenshot is an EMBEDDED media tile — it fills
+   its rounded well flush, held by a hairline + the faintest lift, not popped out on a harsh shadow.
+   Text is the reference's calm two-tone: near-black emphasis on a soft-grey body, generous and airy. */
+.df-howto {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2.25rem 0;
+  padding: 1.35rem;
+  border-radius: 26px;
+  background: #f5f4f1;
+  /* soft, diffuse depth (the iOS signal) + a hair of top sheen so it reads as a real lit surface */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 22px 44px -24px rgba(0, 0, 0, 0.55),
+    0 5px 14px -8px rgba(0, 0, 0, 0.28);
+}
+/* the rounded well the screenshot is set into — fills flush (no white border around the art), with a
+   hairline edge and the gentlest lift so it sits IN the card rather than floating on top of it */
+.df-howto-frame {
+  flex: none;
+  width: clamp(156px, 42%, 240px);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 8px 18px -12px rgba(0, 0, 0, 0.22);
+}
+.df-howto-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.df-howto-text {
+  flex: 1;
+  min-width: 0;
+}
+.df-howto-eyebrow {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9a9aa0;
+}
+.df-howto-text p {
+  margin: 0 0 0.62rem;
+  color: #57565c; /* soft grey body, like the reference */
+  font-size: 0.95rem;
+  line-height: 1.62;
+  letter-spacing: -0.002em; /* a touch of optical tightening for the premium read */
+}
+.df-howto-text p:last-child {
+  margin: 0;
+}
+.df-howto-text strong {
+  font-weight: 600;
+  color: #1c1c1e; /* near-black emphasis — the eye lands on the actions */
+}
+@media (max-width: 620px) {
+  .df-howto {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.1rem;
+    padding: 1.1rem;
+  }
+  .df-howto-frame {
+    width: 100%;
+  }
+}
+
+.page-deskfolio > .tagline.deskfolio-writeup {
+  width: min(640px, calc(100vw - 3rem));
+  margin: clamp(1.35rem, 3vw, 2rem) auto 3rem;
+}
+
+.deskfolio-writeup {
+  /* the how-to desk surface — only a whisper above the page so it blends in rather than popping out
+     as a panel (minimal, like the reference); paired with no hard edge. One knob to retheme. */
+  --df-desk: #1b1814;
+  content-visibility: auto;
+  /* `auto` caches the real rendered height after first reveal, so the 760px estimate only applies once
+     (avoids a scroll-shift in the content below when this section first paints) */
+  contain-intrinsic-size: auto 760px;
+  color: #f5f5f7;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Inter',
+    'Segoe UI',
+    system-ui,
+    sans-serif;
+}
+
+.df-writeup-intro {
+  max-width: 640px;
+  margin: 0 0 1.2rem;
+}
+
+/* iOS branding capsule: a frosted-glass tag, not a flat grey chip. Crisp hairline ring + a hair of
+   top sheen, semibold caps tracked out, and a touch more bottom padding to optically centre the
+   uppercase letters (caps sit high in the line box). */
+/* DeskFolio is the product NAME — so it reads as the title, matching the house convention (home
+   cards: name as the prominent heading, description as the small copy beneath). Not a pill. */
+.df-writeup-name {
+  margin: 0 0 0.42rem;
+  color: #f5f5f7;
+  font-size: clamp(2.25rem, 5vw, 2.85rem);
+  font-weight: 780;
+  line-height: 0.96;
+  letter-spacing: -0.018em;
+}
+
+/* the descriptive headline, now the subtitle under the DeskFolio name */
+.df-writeup-tagline {
+  max-width: 640px;
+  margin: 0;
+  color: rgba(245, 245, 247, 0.86);
+  font-size: clamp(1.2rem, 2.8vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.24;
+  letter-spacing: -0.008em;
+}
+
+.df-writeup-copy {
+  max-width: 640px;
+  margin: 0.92rem 0 0;
+  color: rgba(245, 245, 247, 0.68);
+  font-size: clamp(1rem, 2.2vw, 1.12rem);
+  line-height: 1.58;
+  letter-spacing: -0.004em;
+}
+
+/* a casual throwaway quip — reads one notch quieter and tucked under the line above */
+.df-writeup-aside {
+  margin-top: 0.45rem;
+  color: rgba(245, 245, 247, 0.5);
+}
+
+.df-writeup-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.58rem 0.72rem;
+  margin: 1.65rem 0 0;
+}
+
+/* minimal tinted pills: a faint wash of the hue + a hairline of it + a bright label, so they read as
+   quiet ghost chips on the dark page rather than loud pastel fills */
+.df-writeup-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.42rem 0.92rem 0.44rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.002em;
+}
+
+.df-writeup-pill--orange {
+  color: #e6a07c;
+  background: rgba(230, 160, 124, 0.09);
+  box-shadow: inset 0 0 0 1px rgba(230, 160, 124, 0.22);
+}
+
+.df-writeup-pill--green {
+  color: #84c890;
+  background: rgba(132, 200, 144, 0.09);
+  box-shadow: inset 0 0 0 1px rgba(132, 200, 144, 0.22);
+}
+
+.df-writeup-pill--blue {
+  color: #9db2f5;
+  background: rgba(157, 178, 245, 0.09);
+  box-shadow: inset 0 0 0 1px rgba(157, 178, 245, 0.22);
+}
+
+.deskfolio-writeup .df-howto {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.35rem, 4vw, 1.8rem);
+  margin: 1.85rem 0 1.05rem;
+  padding: 0;
+  border-radius: 0;
+  color: #f5f5f7;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Flush, concentric iOS media tile: the screenshot fills the rounded well edge-to-edge (the wood
+   bleeds to all four sides), the frame clips the corners, and one tight shadow lifts it off the dark
+   page. No cream tray, no inner radius, no aspect-ratio crop — the image itself defines the height,
+   so the composed shot (menu + bear + plant) is never cropped as the column width drifts. */
+/* iOS-style container: the screenshot sits INSIDE an elevated rounded card with an even inset all
+   around — concentric corners (inner radius = outer 30 − 14px padding = 16), a hairline edge, a hair
+   of top sheen, and one soft shadow lifting the card off the dark page. The shot keeps its own
+   matching radius and a gentle seat shadow, so it reads as a framed screenshot, evenly centred in
+   its surface — not a bled-out crop. */
+/* The how-to art is now vector, not a baked screenshot: the bear sticker (its own SVG) + a static
+   copy of the live edit menu — reusing the real LbResize/LbReplace/LbTrash icons — on a themeable
+   "desk". The desk is a single knob, var(--df-desk), so it follows the theme instead of a fixed wood
+   photo, and the whole scene scales crisply. */
+.deskfolio-writeup .df-howto-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  background: var(--df-desk, #1b1814);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.deskfolio-writeup .df-howto-text {
+  padding-top: 0.15rem;
+}
+
+.deskfolio-writeup .df-howto-bear {
+  position: absolute;
+  left: 50%;
+  bottom: 3%;
+  width: 55%;
+  height: auto;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.28));
+}
+
+/* a compact static copy of the iOS edit menu, sitting just ABOVE the sticker (not over its face) */
+.deskfolio-writeup .df-howto-menu {
+  position: absolute;
+  left: 50%;
+  top: 6%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  width: 47%;
+  padding: 5px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.16),
+    0 14px 30px -12px rgba(0, 0, 0, 0.45);
+}
+
+.deskfolio-writeup .df-howto-menu-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 0.55rem;
+  border-radius: 9px;
+  color: #1c1c1e;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.deskfolio-writeup .df-howto-menu-row--danger {
+  color: #e0533a;
+}
+
+.deskfolio-writeup .df-howto-menu-ico {
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+/* the pointer that "long-pressed" the sticker to bloom the menu — white so it reads on the dark desk,
+   sitting just off the bear (white would vanish over the cream sticker) with its tip aimed up-left at
+   it; a soft shadow lifts it off the surface */
+.deskfolio-writeup .df-howto-cursor {
+  position: absolute;
+  right: 12%;
+  bottom: 14%;
+  width: 9%;
+  height: auto;
+  color: #fff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+}
+
+.deskfolio-writeup .df-howto-eyebrow {
+  margin-bottom: 0.72rem;
+  color: rgba(245, 245, 247, 0.5);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.deskfolio-writeup .df-howto-text p {
+  max-width: 36rem;
+  margin: 0 0 1.08rem;
+  color: rgba(245, 245, 247, 0.72);
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  line-height: 1.56;
+  letter-spacing: -0.003em;
+}
+
+.deskfolio-writeup .df-howto-text strong {
+  color: #f5f5f7;
+  font-weight: 720;
+}
+
+.df-reference-strip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+/* a quiet uppercase label, matching the "HOW TO USE" eyebrow — the pills sit below it */
+.df-reference-title {
+  color: rgba(245, 245, 247, 0.5);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.df-reference-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.df-reference-strip a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  color: rgba(245, 245, 247, 0.74);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.004em;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.df-reference-strip a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.075);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 620px) {
+  .page-deskfolio > .tagline.deskfolio-writeup {
+    width: min(100% - 2rem, 640px);
+    margin: 1.25rem auto 2.4rem;
+  }
+
+  .df-writeup-name {
+    font-size: 2.18rem;
+    line-height: 1;
+  }
+
+  .df-writeup-tagline {
+    font-size: 1.18rem;
+    line-height: 1.3;
+  }
+
+  .df-writeup-copy {
+    font-size: 1rem;
+    line-height: 1.56;
+  }
+
+  .deskfolio-writeup .df-howto {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 1.6rem;
+  }
+
+  .deskfolio-writeup .df-howto-text p {
+    font-size: 0.98rem;
+    line-height: 1.58;
+  }
+}
+
+.deskfolio-live {
+  margin-bottom: 0;
+}
+
+/* DeskFolio breaks out of the 640px column and sits on a self-healing cutting mat. The book sizes
+   itself in px; this widens + centres the stage and paints the green grid surface under it. */
+.deskfolio-demo-stage {
+  position: relative; /* anchor for stickers / extra components placed on the mat */
+  isolation: isolate;
+  box-sizing: border-box;
+  width: min(1800px, 98vw);
+  margin-left: 50%;
+  transform: translateX(-50%) scale(var(--df-stage-scale, 1));
+  transform-origin: top center;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 4rem);
+  border-radius: 20px;
+  /* the mat: a deep green base with a fine grid and bolder major lines, plus a printed edge band */
+  background-color: #2f6f5b;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.11) 0 1px, transparent 1px 112px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.11) 0 1px, transparent 1px 112px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 28px),
+    radial-gradient(130% 120% at 50% 0%, #347a64 0%, #285446 70%, #20473b 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 9px rgba(255, 255, 255, 0.05),
+    inset 0 2px 40px rgba(0, 0, 0, 0.28),
+    0 30px 60px -30px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.page-deskfolio .footer {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  /* phones + small tablets: the desk canvas goes full-bleed and fills the screen (no dead space), laid
+     out as a column — controls on top, the one-page book filling the rest. (Breakpoint raised from 560
+     to 760 so narrow/tablet windows get the clean one-page reader instead of a cramped desktop desk.) */
+  .page.page-deskfolio {
+    padding: 0;
+  }
+  .deskfolio-demo-stage {
+    width: 100%; /* full-bleed via the (max-width:none) page, but NOT 100vw — that ignores a scrollbar
+                    and would push the centred book off to one side */
+    min-height: 100svh;
+    margin-left: 0;
+    transform: none; /* one-page book sizes itself via CSS; no stage scaling on mobile */
+    border-radius: 0;
+    padding: 12px 12px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  /* the book wrapper fills the space below the controls and centres the book in it — but with a bottom
+     band reserved (~20vh) for the desk items (iPod + stickers) that sit along the bottom. So the book
+     optically centres in the OPEN space between the controls and the desk clutter, not the raw canvas,
+     and because the reserve is in vh it holds the same on every device. */
+  .df-book-bloom--mobile {
+    flex: 1 1 auto;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 26vh;
+    min-height: 0;
+  }
+}
+

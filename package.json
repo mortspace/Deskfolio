@@ -1,23 +1,66 @@
 {
   "name": "deskfolio",
-  "private": true,
+  "private": false,
   "version": "0.1.0",
   "type": "module",
+  "description": "A pocket-sized portfolio that opens like a book — flip-through pages, draggable stickers, and self-drawing scribble underlines.",
+  "license": "MIT",
+  "author": "mortspace",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mortspace/Deskfolio.git"
+  },
+  "homepage": "https://github.com/mortspace/Deskfolio#readme",
+  "keywords": [
+    "react",
+    "portfolio",
+    "motion",
+    "animation",
+    "svg",
+    "interactive",
+    "deskfolio"
+  ],
+  "main": "./dist/deskfolio.js",
+  "module": "./dist/deskfolio.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/deskfolio.js"
+    },
+    "./styles.css": "./dist/deskfolio.css",
+    "./assets/*": "./public/*"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "public",
+    "README.md"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "build:lib": "vite build --config vite.lib.config.ts && node -e \"require('fs').copyFileSync('types/index.d.ts','dist/index.d.ts')\"",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build:lib"
+  },
+  "peerDependencies": {
+    "motion": ">=12",
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
-    "motion": "^12.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "web-haptics": "^0.0.6"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "motion": "^12.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "typescript": "^5.7.0",
     "vite": "^6.0.0"
   }

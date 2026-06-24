@@ -13,6 +13,37 @@ https://github.com/user-attachments/assets/809826f0-437d-4c35-ab77-4b2f633e8c2c
 - **Self-drawing scribble underlines** — each project name gets a real marker scribble that a "pen" traces along its own path on hover (the centerline is derived from the filled SVG shape, then drawn via `stroke-dashoffset` inside a mask).
 - **Editable text** — the journal/about copy is editable in place.
 
+## Install
+
+```bash
+npm install deskfolio
+```
+
+Peer deps (provide these in your app): `react`, `react-dom`, `motion`.
+
+## Usage
+
+```tsx
+import { DeskFolio } from 'deskfolio'
+import 'deskfolio/styles.css'
+
+export default function Page() {
+  return <DeskFolio />
+}
+```
+
+`DeskFolioPage` is also exported if you want to supply your own page wrapper.
+
+### Assets
+
+DeskFolio loads its stickers/backgrounds from absolute paths (`/stickers/…`, `/backgrounds/…`, `/mort-profile.webp`). Copy the shipped assets into your app's web root so they resolve:
+
+```bash
+cp -r node_modules/deskfolio/public/* public/
+```
+
+(They live under `deskfolio/public` — `stickers/`, `backgrounds/`, and the two `.webp` images.)
+
 ## Tech
 
 - React 19 + [motion.dev](https://motion.dev)
