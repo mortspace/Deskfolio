@@ -1,7 +1,7 @@
 {
   "name": "deskfolio",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "A pocket-sized portfolio that opens like a book: flip-through pages, draggable stickers, and self-drawing scribble underlines.",
   "license": "MIT",
