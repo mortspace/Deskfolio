@@ -3,14 +3,14 @@
   "private": false,
   "version": "0.1.0",
   "type": "module",
-  "description": "A pocket-sized portfolio that opens like a book — flip-through pages, draggable stickers, and self-drawing scribble underlines.",
+  "description": "A pocket-sized portfolio that opens like a book: flip-through pages, draggable stickers, and self-drawing scribble underlines.",
   "license": "MIT",
   "author": "mortspace",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mortspace/Deskfolio.git"
   },
-  "homepage": "https://github.com/mortspace/Deskfolio#readme",
+  "homepage": "https://feralui.vercel.app/#/deskfolio",
   "keywords": [
     "react",
     "portfolio",
